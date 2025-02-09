@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health Services Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      justify-content: center;
+      padding: 0;
+    }
+    nav ul li {
+      margin: 0 1rem;
+    }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+    }
+    section {
+      padding: 2rem;
+      border-bottom: 1px solid #ccc;
+    }
+    h2 {
+      color: #007BFF;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      margin: auto;
+    }
+    form label, form input, form select, form button {
+      margin-bottom: 1rem;
+    }
+    form button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+      text-align: left;
+    }
+    table th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Health Services Portal</h1>
+    <nav>
+      <ul>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#login">Login</a></li>
+        <li><a href="#clinics">Search Clinics</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Registration Section -->
+  <section id="register">
+    <h2>Register</h2>
+    <form id="register-form">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+      
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+      
+      <label for="user-type">I am a:</label>
+      <select id="user-type" name="user-type">
+        <option value="health-worker">Health Worker</option>
+        <option value="patient">Patient</option>
+      </select>
+      
+      <input type="checkbox" id="mfa" name="mfa">
+      <label for="mfa">Enable Multi-Factor Authentication</label>
+      
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
+  <!-- Login Section -->
+  <section id="login">
+    <h2>Login</h2>
+    <form id="login-form">
+      <label for="login-email">Email</label>
+      <input type="email" id="login-email" name="email" required>
+      
+      <label for="login-password">Password</label>
+      <input type="password" id="login-password" name="password" required>
+      
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  <!-- Search Clinics Section -->
+  <section id="clinics">
+    <h2>Search Clinics</h2>
+    <form id="search-form">
+      <input type="text" id="search-clinic" placeholder="Search clinics...">
+      <select id="service-filter">
+        <option value="all">All Services</option>
+        <option value="ENT">ENT Clinic</option>
+        <option value="Eye">Eye Clinic</option>
+        <option value="TB">TB & Leprosy Clinic</option>
+        <option value="STD">STD Clinic</option>
+        <option value="Psychiatry">Psychiatry Clinic</option>
+        <option value="Orthopedic">Orthopedic Clinic</option>
+      </select>
+      <button type="submit">Search</button>
+    </form>
+    <div id="clinic-results"></div>
+  </section>
+
+  <!-- Booking Section -->
+  <section id="booking">
+    <h2>Book an Appointment</h2>
+    <table id="available-slots">
+      <tr>
+        <th>Time</th>
+        <th>Date</th>
+        <th>Book</th>
+      </tr>
+      <tr>
+        <td>10:00 AM</td>
+        <td>01/25/2025</td>
+        <td><button class="book-btn">Book</button></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- User Dashboard Section -->
+  <section id="dashboard">
+    <h2>User Dashboard</h2>
+    <div id="dashboard-content">
+      <section>
+        <h3>Upcoming Appointments</h3>
+        <ul id="upcoming-appointments">
+          <li>No upcoming appointments.</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Past Appointments</h3>
+        <ul id="past-appointments">
+          <li>No past appointments.</li>
+        </ul>
+      </section>
+      <button id="edit-profile">Edit Profile</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Health Services Portal. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // auth.js
+    document.getElementById("register-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Registration successful!");
+    });
+
+    document.getElementById("login-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      alert("Login successful!");
+    });
+
+    // clinics.js
+    const clinics = [
+      { name: "ENT Clinic", service: "ENT", location: "City Hospital" },
+      { name: "Eye Clinic", service: "Eye", location: "Health Center" },
+      { name: "TB & Leprosy Clinic", service: "TB", location: "Main Hospital" },
+      { name: "STD Clinic", service: "STD", location: "Downtown Clinic" },
+      { name: "Psychiatry Clinic", service: "Psychiatry", location: "Mental Health Center" },
+      { name: "Orthopedic Clinic", service: "Orthopedic", location: "Specialist Hospital" },
+    ];
+
+    document.getElementById("search-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const searchQuery = document.getElementById("search-clinic").value.toLowerCase();
+      const serviceFilter = document.getElementById("service-filter").value;
+      const results = clinics.filter(clinic =>
+        (serviceFilter === "all" || clinic.service === serviceFilter) &&
+        (clinic.name.toLowerCase().includes(searchQuery) || clinic.location.toLowerCase().includes(searchQuery))
+      );
+      const resultsContainer = document.getElementById("clinic-results");
+      resultsContainer.innerHTML = results.length
+        ? results.map(clinic => <p>${clinic.name} - ${clinic.location}</p>).join("")
+        : "<p>No clinics found.</p>";
+    });
+
+    // booking.js
+    document.querySelectorAll(".book-btn").forEach(button => {
+      button.addEventListener("click", function () {
+        alert("Appointment booked!");
+      });
+    });
+  </script>
+</body>
+</html>
